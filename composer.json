@@ -1,0 +1,33 @@
+{
+    "name": "orlandolibardi/contactsimplecms",
+    "description": "Modulo de contatos",
+    "type": "module",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Orlando Libardi",
+            "email": "orlando.libardi@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "orlandolibardi/admincms": "dev-master",
+        "orlandolibardi/filescms" : "dev-master"
+    },
+    "autoload": {
+        "psr-4": {
+            "OrlandoLibardi\\ContactCms\\": "./"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "OrlandoLibardi\\ContactCms\\app\\Providers\\OlCmsContactServiceProvider",
+                "OrlandoLibardi\\ContactCms\\app\\Providers\\OlCmsContactviewServiceProvider"
+            ],
+            "aliases": {
+                "OlCmsContact": "OrlandoLibardi\\ContactCms\\app\\Providers\\OlCmsContactFacada"
+            }  
+        }
+    }
+}
