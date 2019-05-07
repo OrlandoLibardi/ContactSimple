@@ -8,8 +8,7 @@ use Illuminate\Support\Facades\Blade;
 use Illuminate\View\Compilers\BladeCompiler;
 
 use OrlandoLibardi\ContactCms\app\Contact;
-use OrlandoLibardi\ContactCms\app\ContactObserver;
-
+use OrlandoLibardi\ContactCms\app\Observers\ContactObserver;
 
 class OlCmsContactServiceProvider extends ServiceProvider{
     /**

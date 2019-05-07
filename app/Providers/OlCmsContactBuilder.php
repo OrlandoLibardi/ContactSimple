@@ -18,6 +18,7 @@ class OlCmsContactBuilder
     protected $accepted = [];
     protected $params;
     protected $host;
+    protected $template;
     /**
      * The URL generator instance.
      *
@@ -34,11 +35,13 @@ class OlCmsContactBuilder
     {
         $this->url = url()->current();
         $this->host = request()->getSchemeAndHttpHost();
+        $this->template = "website.contact.form";
     }
 
     public function form($alias=false)
-    {             
-
+    {   
+        $ip_address = \Request::getClientIp(true);          
+        return view($this->template, compact('ip_address'));
     }
 
    

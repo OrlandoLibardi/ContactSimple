@@ -2,4 +2,7 @@
 /**
  * Contact View
  */
-Route::resource('contact-view/', 'ContactViewController@store');
+Route::group(['middleware' => ['web']], function() {
+    Route::post('contact-view', 'OrlandoLibardi\ContactCms\app\Http\Controllers\ContactViewController@store')
+    ->name("contact-send");
+});

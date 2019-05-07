@@ -1,6 +1,6 @@
 <?php
 
-namespace rlandoLibardi\ContactCms\app\Http\Requests;
+namespace OrlandoLibardi\ContactCms\app\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -25,14 +25,14 @@ class ContactResponseRequest extends FormRequest
     {
 
         switch($this->method()){
-            case 'PATCH':
+            case 'PUT':
                 $rules = [
-                    'content_admin_template'  => 'required',
-                    'content_user_template'   => 'required',                    
+                    'admin_template'  => 'required',
+                    'user_template'   => 'required',                    
                     'title_admin'             => 'required',
                     'title_user'              => 'required',
-                    'reply_user_name'         => 'required|email',
-                    'reply_user_email'        => 'required|string|max:90',
+                    'reply_user_name'         => 'required|string|max:90',
+                    'reply_user_email'        => 'required|email',
                     'cc.*'                    => 'sometimes',
                     'cc.*.name'               => 'sometimes',
                     'cc.*.email'              => 'sometimes|email'                                        

@@ -1,6 +1,7 @@
 <?php
 namespace OrlandoLibardi\ContactCms\app;
 use File;
+use Log;
 
 class ServiceContactConfig
 {
@@ -9,12 +10,12 @@ class ServiceContactConfig
      */
     public static function getFileName()
     {
-        return config_path() . 'contact.php';
+        return config_path('/') . 'contact.php';
     }
     /**
      * getConfig
      */
-    public function getConfig()
+    public static function getConfig()
     {
         //return Lang::get(self::getFileName());
         return File::getRequire(self::getFileName());
@@ -22,7 +23,7 @@ class ServiceContactConfig
     /**
      * setTag
      */
-    public function setTag($tags)
+    public static function setTag($tags)
     {        
         $linha = "\r\n";
         $content = '<?php' . $linha;
@@ -42,29 +43,40 @@ class ServiceContactConfig
 
     }
 
-    public function keyValue($tags)
+    public static function keyValue($tags)
     {
+        $linha = "\r\n";
         $content = "";
         foreach($tags as $key=>$value)
         {
-            if(is_array($value))
-            {
-                $content .= self::keyValue($value);
-
-            }else
-            {
+            if(!is_array($value)){
                 $value = str_replace('"', '', $value);
                 $value = str_replace("'", "", $value);
                 $content .= "'" . $key ."' => '" . $value . "', " . $linha;
+            }
+            else{               
+                $content .= "'" . $key ."' => [" . self::arrayCC($value) . "], " . $linha;                
             }
             
         }
         return $content;
     }
+
+    
+    public static function arrayCC($cc)
+    {
+        $linha = "\r\n";
+        $content = "";
+        foreach($cc as $v){
+            $content .= "['name' => '" . $v['name'] . "', 'email' => '" . $v['email'] . "'], " . $linha;                
+        }        
+        return $content;
+    }  
+
     /**
      * destroy tag
      */
-    public function tagDestroy($keys, $tags=false)
+    public static function tagDestroy($keys, $tags=false)
     {
         if(!$tags) $tags = self::getTag();
 
@@ -80,7 +92,7 @@ class ServiceContactConfig
     /**
      * save file
      */
-    public function tagSaveFile($content)
+    public static function tagSaveFile($content)
     {
         return File::put(self::getFileName(), $content);
     }

@@ -10,6 +10,9 @@ use Spatie\Permission\Models\Permission;
 use OrlandoLibardi\ContactCms\app\Contact;
 use OrlandoLibardi\ContactCms\app\Http\Requests\ContactRequest;
 
+use OrlandoLibardi\ContactCms\app\ContactMail;
+
+
 class ContactController extends Controller
 {
     public function __construct()
@@ -23,8 +26,14 @@ class ContactController extends Controller
         return view('admin.contact.index', compact('contacts'));
     }
 
-    public function show($id){
+    public function show($id)
+    {
         $contact = Contact::find($id);
+
+        if($contact->status == 0){
+            $contact->update(['status' => 1]);
+        }
+        
         return view ('admin.contact.view', compact('contact'));
     }
 

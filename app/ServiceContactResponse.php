@@ -10,7 +10,7 @@ class ServiceContactResponse
      */
     public static function getContactPath()
     {
-        return resource_path('emails\/');
+        return resource_path('views\/emails\/');
     }
     /**
      * Salva o arquivo
@@ -28,8 +28,8 @@ class ServiceContactResponse
      */
     public static function name($type)
     {
-        $name = ($type == 0) ? "admin_contact_response" : "user_contact_response";
-        return str_slug($name) . ".blade.php";
+        $name = ($type == 0) ? "adminContactResponse" : "userContactResponse";
+        return $name . ".blade.php";
     }
     /**
      *  Retorna o template para visualização do usuário
@@ -61,7 +61,11 @@ class ServiceContactResponse
         $patterns[6] = 'else';
         $patterns[7] = '__';    
         $patterns[8] = 'end@foreach'; 
-        $patterns[9] = 'end@if';       
+        $patterns[9] = 'end@if'; 
+        $patterns[10] = "extends";
+        $patterns[11] = "section";
+        $patterns[12] = "endsection";
+        $patterns[13] = 'end@section'; 
         $replaces[0]  = '{{ ';
         $replaces[1]  = ' }}';
         $replaces[2]  = '@foreach';
@@ -71,7 +75,11 @@ class ServiceContactResponse
         $replaces[6]  = '@else';
         $replaces[7]  = '$';
         $replaces[8]  = '@endforeach';
-        $replaces[9]  = '@endif';
+        $replaces[9]  = '@endif';        
+        $replaces[10] = "@extends";
+        $replaces[11] = "@section";
+        $replaces[12] = "@endsection";
+        $replaces[13] = '@endsection'; 
 
         return str_replace($patterns, $replaces, $content);
     }
@@ -88,7 +96,12 @@ class ServiceContactResponse
         $patterns[5] = 'endif';
         $patterns[6] = 'else';
         $patterns[7] = '__';    
-        $patterns[8] = 'end@foreach';        
+        $patterns[8] = 'end@foreach'; 
+        $patterns[9] = 'end@if'; 
+        $patterns[10] = "extends";
+        $patterns[11] = "section";
+        $patterns[12] = "endsection";
+        $patterns[13] = 'end@section'; 
         $replaces[0]  = '{{ ';
         $replaces[1]  = ' }}';
         $replaces[2]  = '@foreach';
@@ -98,6 +111,11 @@ class ServiceContactResponse
         $replaces[6]  = '@else';
         $replaces[7]  = '$';
         $replaces[8]  = '@endforeach';
+        $replaces[9]  = '@endif';        
+        $replaces[10] = "@extends";
+        $replaces[11] = "@section";
+        $replaces[12] = "@endsection";
+        $replaces[13] = '@endsection'; 
 
         return str_replace($replaces, $patterns, $content);
     }
